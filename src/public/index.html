@@ -1,0 +1,75 @@
+<html>
+  <style>
+  body {
+    font-family: Arial;
+  }
+  .parent {
+    display: flex;
+  }
+
+  .child {
+    width: 200px;
+    margin: auto;
+  }
+
+  button {
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    background-color: rgb(0, 128, 255);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  #qr {
+    width: 200px;
+    height: 200px;
+  }
+
+  input[type='text'], input[type='number'] {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+  }
+
+  ::placeholder {
+    color: grey; 
+  } 
+
+  </style>
+  <script>
+    const retrieveInvoice = (memo = '', value = 100) => {
+
+      fetch(`/invoice?memo=${memo}&value=${value}`)
+        .then(response => response.json())
+        .then(data => {
+          const image = document.getElementById('qr');
+          image.src = data.qr;
+        });
+    };
+
+    const onClick = () => {
+      const memo = document.getElementById('memo').value || null;
+      const value = document.getElementById('value').value || null;
+
+      retrieveInvoice(memo, value);
+    };
+
+    retrieveInvoice("Thanks!", 100);
+  </script>
+  <body>
+    <div class='parent'>
+      <div class='child'>
+        <image id='qr' class='image'/>
+        <input id='memo' type='text' placeholder='Thanks!'/>
+        <input id='value' type='number' placeholder='100 (value in sats)'>
+        <button value="Submit" onClick="onClick()">Get QR</button>
+      </div>
+    </div>
+  </body>
+</html>

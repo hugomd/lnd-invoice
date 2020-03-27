@@ -1,0 +1,24 @@
+{
+  "name": "lnd-invoice",
+  "version": "1.0.0",
+  "description": "Hosts a tiny API that generates a QR code for a Bitcoin Lightning invoice.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugomd/lnd-invoice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hugomd/lnd-invoice/issues"
+  },
+  "homepage": "https://github.com/hugomd/lnd-invoice#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "qrcode": "^1.4.4"
+  }
+}

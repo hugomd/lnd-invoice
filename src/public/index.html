@@ -45,7 +45,7 @@
   <script>
     const retrieveInvoice = (memo = '', value = 100) => {
 
-      fetch(`/invoice?memo=${memo}&value=${value}`)
+      fetch(`invoice?memo=${memo}&value=${value}`)
         .then(response => response.json())
         .then(data => {
           const image = document.getElementById('qr');

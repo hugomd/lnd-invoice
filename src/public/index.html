@@ -1,27 +1,9 @@
 <html>
   <head>
+    <title>Donate Sats ⚡</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="style.css">
-    <script>
-      const retrieveInvoice = (memo = '', value = 100) => {
-
-        fetch(`invoice?memo=${memo}&value=${value}`)
-          .then(response => response.json())
-          .then(data => {
-            const image = document.getElementById('qr');
-            image.src = data.qr;
-          });
-      };
-
-      const onClick = () => {
-        const memo = document.getElementById('memo').value || null;
-        const value = document.getElementById('value').value || null;
-
-        retrieveInvoice(memo, value);
-      };
-
-      retrieveInvoice("Thanks!", 100);
-    </script>
+    <script src="clipboard.js"></script>
   </head>
   <body>
     <div class='parent'>
@@ -30,7 +12,34 @@
         <input id='memo' type='text' placeholder='Thanks!'/>
         <input id='value' type='number' placeholder='100 (value in sats)'>
         <button value="Submit" onClick="onClick()">Get QR</button>
+        <button id='payment_request' data-clipboard-text=''>Copy to clipboard</button>
       </div>
     </div>
   </body>
+  <script>
+    let payment_request;
+    const clip = new ClipboardJS('#payment_request');
+
+    const retrieveInvoice = (memo = '', value = 100) => {
+
+      fetch(`invoice?memo=${memo}&value=${value}`)
+        .then(response => response.json())
+        .then(data => {
+          const image = document.getElementById('qr');
+          image.src = data.qr;
+
+          const payment_request = document.getElementById('payment_request');
+          payment_request.setAttribute('data-clipboard-text', data.payment_request);
+        });
+    };
+
+    const onClick = () => {
+      const memo = document.getElementById('memo').value || null;
+      const value = document.getElementById('value').value || null;
+
+      retrieveInvoice(memo, value);
+    };
+
+    retrieveInvoice("Thanks!", 100);
+  </script>
 </html>

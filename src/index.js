@@ -33,7 +33,7 @@ const instance = axios.create({
       res.send({error: 'value (sats) required'});
     }
 
-    const {data} = await instance({
+    const {data: {payment_request}} = await instance({
       method: 'POST',
       url: `https://${LND_IP}:${LND_PORT}/v1/invoices`,
       headers: {
@@ -45,9 +45,9 @@ const instance = axios.create({
       },
     });
 
-    const qr = await qrcode.toDataURL(data.payment_request);
+    const qr = await qrcode.toDataURL(payment_request);
 
-    res.send({qr});
+    res.send({qr, payment_request});
   });
 
   app.listen(port, () => console.log(`Listening on port ${port}!`));

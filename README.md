@@ -3,7 +3,7 @@
 Hosts a tiny API that generates a QR code for a Bitcoin Lightning invoice.
 
 ## Demo
-You can try it out here: https://hugo.md/donate/
+You can try it out here: https://lightning.hugo.md/
 
 ![Screenshot](./screenshot.png)
 

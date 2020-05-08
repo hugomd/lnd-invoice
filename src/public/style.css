@@ -1,8 +1,9 @@
 body {
-  font-family: Arial;
+  font-family: sans-serif, Arial;
   padding: 0;
   margin: 0;
 }
+
 .parent {
   display: flex;
   flex-direction: column;

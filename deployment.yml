@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lnd-invoice
+  namespace: lnd-invoice
+spec:
+  selector:
+    matchLabels:
+      app: lnd-invoice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lnd-invoice
+    spec:
+      imagePullSecrets:
+      - name: github-registry
+      containers:
+        - name: lnd-invoice
+          image: docker.pkg.github.com/hugomd/lnd-invoice/lnd-invoice:d96a0fe
+          ports:
+            - containerPort: 8080
+          env:
+            - name: LND_IP
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: LND_IP
+            - name: LND_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: LND_PORT
+            - name: MACAROON_BASE64
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: MACAROON_BASE64
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lnd-invoice
+  namespace: lnd-invoice
+spec:
+  selector:
+    app: lnd-invoice
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: config
+  namespace: lnd-invoice
+type: Opaque
+stringData:
+  LND_IP: "127.0.0.1"
+  LND_PORT: "8080"
+  MACAROON_BASE64: ""

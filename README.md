@@ -15,7 +15,7 @@ docker run \
   -e LND_IP="10.0.0.1" \
   -e LND_PORT="8080" \
   -e MACAROON_BASE64="YOUR_MACAROON" \
-  docker.pkg.github.com/hugomd/lnd-invoice/lnd-invoice:latest
+  ghcr.io/hugomd/lnd-invoice:889b897
 ```
 
 However GitHub Packages doesn't allow non-auth'd pulling, so I'll be pushing this to Docker Hub shortly for public usage.

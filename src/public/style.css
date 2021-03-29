@@ -1,9 +1,19 @@
+:root {
+  --main-bg-color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: black;
+  }
+}
+
 body {
   font-family: sans-serif, Arial;
   padding: 0;
   margin: 0;
+  background-color: var(--main-bg-color)
 }
-
 .parent {
   display: flex;
   flex-direction: column;
